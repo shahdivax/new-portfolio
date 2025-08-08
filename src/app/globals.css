@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Design tokens */
+:root {
+  /* Default to LIGHT theme tokens */
+  --bg: #fbfdfc; /* near-white with a hint of mint */
+  --fg: #0e1514; /* deep graphite green */
+  --muted: #5f6e6a; /* slate green */
+  --teal: #0f766e; /* warm teal 700 */
+  --teal-500: #14b8a6; /* accent */
+  --amber: #f59e0b; /* warm amber 500 */
+  --amber-400: #fbbf24;
+  --card: rgba(0, 0, 0, 0.04);
+  --ring: color-mix(in oklab, var(--teal) 55%, white 45%);
+}
+
+/* Theme surface tokens for Tailwind @theme */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-teal: var(--teal);
+  --color-teal-500: var(--teal-500);
+  --color-amber: var(--amber);
+  --color-amber-400: var(--amber-400);
+  --color-card: var(--card);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+.dark {
+  --bg: #0b1211;
+  --fg: #e9f3f1;
+  --muted: #9fb0ad;
+  --card: rgba(255, 255, 255, 0.05);
+  --ring: color-mix(in oklab, var(--amber) 55%, white 45%);
+}
+
+/* Global reset and base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body { 
+  /* Light subtle tints, switch naturally in dark via --bg */
+  background: radial-gradient(1200px_1200px at 20% -10%, color-mix(in oklab, var(--teal) 6%, var(--bg) 94%), var(--bg)) no-repeat,
+              radial-gradient(900px_900px at 120% 10%, color-mix(in oklab, var(--amber) 5%, var(--bg) 95%), transparent 60%) no-repeat,
+              var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+/* Smooth theme transitions */
+.theme-smooth {
+  transition-property: background-color, color, border-color, fill, stroke;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(.2,.8,.2,1);
+}
+
+/* Utilities */
+.container-px { padding-left: clamp(1rem, 4vw, 2rem); padding-right: clamp(1rem, 4vw, 2rem); }
+.max-w-wrapper { max-width: 1200px; margin-inline: auto; }
+
+/* Focus */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-ring);
+  border-radius: 12px;
+}
