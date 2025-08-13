@@ -41,7 +41,7 @@ export function Hero() {
               View Projects
             </Link>
             <a
-              href="/resume.pdf"
+              href="https://huggingface.co/datasets/diabolic6045/divax-portfolio/resolve/main/public/resume.pdf"
               download="resume.pdf"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium hover:bg-card transition"
             >
