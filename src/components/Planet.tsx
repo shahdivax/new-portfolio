@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { useRef, useMemo, useState, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useTexture, OrbitControls } from "@react-three/drei";
 import type { Group, Texture } from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 function toRad(d: number) { return (d * Math.PI) / 180; }
 
@@ -23,6 +24,12 @@ function RotatingSphere({
   speed?: number; // radians per second
 }) {
   const group = useRef<Group>(null!);
+  const controlsRef = useRef<OrbitControlsImpl>(null!);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const lastInteractionTime = useRef<number>(Date.now());
+  const inactivityTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
+  
+  const { gl } = useThree();
 
   // Always load valid URLs to avoid loader errors; fall back to base map
   const maps = useTexture([
@@ -39,31 +46,74 @@ function RotatingSphere({
   const [map, spec, clouds, cloudsAlpha] = maps;
   const cloudMat = useMemo(() => ({ transparent: true, depthWrite: false }), []);
 
+  // Handle interaction events
+  useEffect(() => {
+    const handleInteraction = () => {
+      setIsAutoRotating(false);
+      lastInteractionTime.current = Date.now();
+      
+      // Clear existing timeout
+      if (inactivityTimeout.current) {
+        clearTimeout(inactivityTimeout.current);
+      }
+      
+      // Set new timeout for 15 seconds (15000ms)
+      inactivityTimeout.current = setTimeout(() => {
+        setIsAutoRotating(true);
+      }, 15000);
+    };
+
+    const canvas = gl.domElement;
+    
+    // Listen for both mouse and touch events
+    canvas.addEventListener('mousedown', handleInteraction);
+    canvas.addEventListener('touchstart', handleInteraction);
+
+    return () => {
+      canvas.removeEventListener('mousedown', handleInteraction);
+      canvas.removeEventListener('touchstart', handleInteraction);
+      if (inactivityTimeout.current) {
+        clearTimeout(inactivityTimeout.current);
+      }
+    };
+  }, [gl]);
+
   useFrame((_s, delta) => {
     if (!group.current) return;
-    group.current.rotation.y += speed * delta; // slow, continuous
+    
+    // Only auto-rotate when not being dragged
+    if (isAutoRotating && controlsRef.current) {
+      group.current.rotation.y += speed * delta;
+    }
   });
 
   return (
-    <group ref={group} rotation={[0, 0, toRad(tiltDeg)]}>
-      <mesh>
-        <sphereGeometry args={[1, 128, 128]} />
-        {spec ? (
-          // eslint-disable-next-line react/jsx-no-undef
-          <meshPhongMaterial map={map} specularMap={spec} shininess={7} />
-        ) : (
-          // eslint-disable-next-line react/jsx-no-undef
-          <meshLambertMaterial map={map} />
-        )}
-      </mesh>
-      {clouds && (
-        <mesh scale={1.008}>
+    <>
+      <OrbitControls
+        ref={controlsRef}
+        enableZoom={false}
+        enablePan={false}
+        rotateSpeed={0.5}
+        minPolarAngle={Math.PI / 4}
+        maxPolarAngle={(3 * Math.PI) / 4}
+      />
+      <group ref={group} rotation={[0, 0, toRad(tiltDeg)]}>
+        <mesh>
           <sphereGeometry args={[1, 128, 128]} />
-          {/* eslint-disable-next-line react/jsx-no-undef */}
-          <meshLambertMaterial map={clouds} alphaMap={cloudsAlpha} {...cloudMat} />
+          {spec ? (
+            <meshPhongMaterial map={map} specularMap={spec} shininess={7} />
+          ) : (
+            <meshLambertMaterial map={map} />
+          )}
         </mesh>
-      )}
-    </group>
+        {clouds && (
+          <mesh scale={1.008}>
+            <sphereGeometry args={[1, 128, 128]} />
+            <meshLambertMaterial map={clouds} alphaMap={cloudsAlpha} {...cloudMat} />
+          </mesh>
+        )}
+      </group>
+    </>
   );
 }
 
