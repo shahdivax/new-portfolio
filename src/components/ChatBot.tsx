@@ -36,41 +36,64 @@ Professional Experience:
  - Designed a robust training framework using PyTorch and Hugging Face's Transformers.
  - Introduced a user-friendly Gradio interface to streamline synthetic structured data generation.
 
-Key Projects:
-1. **QuizWiz** (https://quiz-wiz-official.vercel.app/)
- - Advanced, AI-powered chatbot creation platform enabling users to build, deploy, and interact with custom chatbots.
- - Offers user-friendly interface leveraging cutting-edge natural language processing technologies.
- - Tech: NLP, Chatbot, Flask, Mistral-AI-API, Gemini-API.
+Key Projects (All project names are clickable links):
 
-2. **Sanskrit qwen 7B Translate** (https://huggingface.co/diabolic6045/Sanskrit-qwen-7B-Translate)
- - Fine-tuned the Qwen2.5-7B-Instruct-1M language model to translate Vedic Sanskrit texts into English.
- - Leveraged Qlora technique and a curated dataset of Sanskrit-English parallel texts.
- - Aims to make ancient Sanskrit literature more accessible.
- - Tech: LLM, Translation, Fine-tuning, Sanskrit, Qwen-2.5-7B-Instruct-1M.
+1. **Sanskrit Translate v2** (https://huggingface.co/diabolic6045/Sanskrit-qwen-7B-Translate-v2)
+ - Fine-tuned Qwen2.5-7B-Instruct optimized for Sanskrit language processing.
+ - Features: Sanskrit to IAST transliteration, bidirectional Sanskrit ↔ English translation with context-aware preservation.
+ - Enhanced with specialized dataset, chat template format, and optimized LoRA configuration.
+ - Tech: LLM, Translation, Fine-tuning, Sanskrit, Qwen-2.5-7B, LoRA.
 
-3. **Geolocation through Image Classification** (https://huggingface.co/diabolic6045/indian_cities_image_classification)
- - Developed a deep learning model to identify Indian cities from images, achieving 66.3% accuracy.
- - Implemented transfer learning using VGG16 CNN for feature extraction.
+2. **Sanskrit Tokenizer** (https://huggingface.co/diabolic6045/Sanskrit-English-qwen2-tokenizer)
+ - Native Sanskrit-English tokenizer for Qwen2.5 providing 4.5x better efficiency than byte-level tokens.
+ - Produces clean, readable tokens with 120K vocabulary trained on massive English+Sanskrit corpus.
+ - Native Hugging Face format with perfect reconstruction.
+ - Tech: Tokenizer, NLP, Sanskrit, BPE, HuggingFace.
+
+3. **Sanskrit Translate v1** (https://huggingface.co/diabolic6045/Sanskrit-qwen-7B-Translate)
+ - Fine-tuned Qwen2.5-7B-Instruct-1M on Sanskrit datasets using QLoRA (Axolotl).
+ - Gradient checkpointing, 4-bit quantization, and cosine LR to translate Vedic Sanskrit → English.
+ - Tech: LLM, Translation, Fine-tuning, Sanskrit, Qwen-2.5-7B.
+
+4. **Flux LoRAs** (https://flux-loras.divaxshah.com)
+ - Flux.dev model fine-tuned on different images creating various LoRAs that you can explore.
+ - Specialized LoRA adapters for different visual styles and concepts.
+ - Tech: Generative AI, Image Generation, LoRA, Flux, Fine-tuning.
+
+5. **Geolocation through Image Classification** (https://huggingface.co/diabolic6045/indian_cities_image_classification)
+ - Transfer learning with VGG16 to identify Indian cities from images, achieving 66.3% accuracy.
  - Tech: Computer Vision, Deep Learning, Transfer Learning.
 
-4. **Character Chatbot** (https://huggingface.co/diabolic6045/tony_stark_chatbot)
- - Built an NLP chatbot using Python, TensorFlow, and HuggingFace Transformers for interactive conversations with fictional characters.
- - Tech: LLM, Chatbot, Fine-tuning, DialoGPT-medium.
+6. **Character Chatbot** (https://huggingface.co/diabolic6045/tony_stark_chatbot)
+ - Conversational agents with DialoGPT-medium: interactive chats as Tony Stark, Harry Potter, and more.
+ - Tech: LLM, Chatbot, Fine-tuning, DialoGPT.
 
-5. **Itinerary Generator** (https://huggingface.co/diabolic6045/itineraries_Generator)
- - Developed an advanced itinerary builder by fine-tuning GPT-2 on worldwide trip plans.
- - Used PyTorch and Hugging Face's Transformers for on-demand travel itinerary generation.
+7. **Itinerary Generator** (https://huggingface.co/diabolic6045/itineraries_Generator)
+ - GPT-2 fine-tuned for on-demand travel itinerary generation with PyTorch + Transformers.
  - Tech: LLM, GPT-2, Fine-tuning.
 
-6. **Synthetic Data Generation** (/documents/divax-recco.pdf)
- - Created a generative AI system for synthetic structured data generation.
- - Implemented a pipeline with Python and Gradio for data cleaning, deduplication, and embedding.
- - Tech: Generative AI, Data Synthesis, PyTorch, Fine-tuning, Llama-2.
+8. **Lore Keeper** (https://lore-keeper.divaxshah.com)
+ - An infinite story generator tool with different genres and themes.
+ - Create endless narratives with customizable settings.
+ - Tech: AI, Story Generation, NLP, Creative AI.
 
-7. **Something** (https://something-atep.onrender.com)
- - A web application designed to keep investors informed with the latest, most relevant news about their stock portfolio.
- - Aggregates news from multiple trusted sources and uses AI to summarize key points.
- - Tech: Flask, Firebase, Gemini AI.
+9. **World Sim** (https://world-sim.divaxshah.com)
+ - A CLI-based game where users can simulate real worlds and play with them.
+ - Features different models to choose from for various simulation scenarios.
+ - Tech: Game, Simulation, CLI, AI.
+
+10. **Todo** (https://todo.divaxshah.com)
+ - A crazy 3D todo list keeper with immersive visual experience for managing your tasks.
+ - Tech: 3D, Productivity, WebGL.
+
+11. **AURA Vibes - Random Quote Maker** (https://random-quote-maker.divaxshah.com)
+ - Generate your personal quotes with AI. Share a thought, choose your vibe, and watch AI craft a unique quote card.
+ - Features: manual input, Twitter analysis, multiple themes, moods, and card sizes.
+ - Tech: AI, Quote Generation, Creative.
+
+12. **QuizWiz** (https://quizwiz.divaxshah.com) [DEPRECATED]
+ - AI-powered platform for one-click custom chatbot creation with document ingestion (PDF/TXT), RAG via LlamaIndex.
+ - Tech: NLP, Chatbot, Flask, Mistral-AI-API, Gemini-API.
 
 Technical Skills:
 - **ML Frameworks & Libraries:** PyTorch, TensorFlow / Keras, HuggingFace Transformers, scikit-learn, LangChain, NumPy & Pandas.
@@ -189,10 +212,10 @@ export function ChatBot() {
 
   const suggestions = [
     "His role at Avinyaa?",
-    "AI models fine-tuned at Avinyaa?",
-    "Jugaad OCR+LLM pipeline?",
-    "Details on QuizWiz?",
-    "Sanskrit Qwen project?",
+    "Sanskrit Translate v2?",
+    "Lore Keeper project?",
+    "World Sim details?",
+    "Flux LoRAs?",
   ];
 
   return (

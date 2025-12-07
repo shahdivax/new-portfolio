@@ -49,22 +49,37 @@ export type Project = {
   description: string;
   tags: string[];
   url?: string;
+  deprecated?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    title: "QuizWiz",
+    title: "Sanskrit Translate v2",
     description:
-      "AI-powered platform for one-click custom chatbot creation with document ingestion (PDF/TXT), RAG via LlamaIndex, and deployment-ready workflows.",
-    tags: ["NLP", "Chatbot", "Flask", "Mistral-AI-API", "Gemini-API", "Website"],
-    url: "https://quiz-wiz-official.vercel.app/",
+      "Fine-tuned Qwen2.5-7B-Instruct optimized for Sanskrit language processing. Features Sanskrit to IAST transliteration, bidirectional Sanskrit ↔ English translation with context-aware preservation. Enhanced with specialized dataset, chat template format, and optimized LoRA configuration.",
+    tags: ["LLM", "Translation", "Fine-tuning", "Sanskrit", "Qwen-2.5-7B", "LoRA", "Model"],
+    url: "https://huggingface.co/diabolic6045/Sanskrit-qwen-7B-Translate-v2",
   },
   {
-    title: "Sanskrit-qwen (7B) Translate",
+    title: "Sanskrit Tokenizer",
+    description:
+      "Native Sanskrit-English tokenizer for Qwen2.5 providing 4.5x better efficiency than byte-level tokens. Produces clean, readable tokens with 120K vocabulary trained on massive English+Sanskrit corpus. Native Hugging Face format with perfect reconstruction.",
+    tags: ["Tokenizer", "NLP", "Sanskrit", "BPE", "HuggingFace", "Model"],
+    url: "https://huggingface.co/diabolic6045/Sanskrit-English-qwen2-tokenizer",
+  },
+  {
+    title: "Sanskrit Translate v1",
     description:
       "Fine-tuned Qwen2.5-7B-Instruct-1M on Sanskrit datasets using QLoRA (Axolotl), gradient checkpointing, 4-bit quantization, and cosine LR to translate Vedic Sanskrit → English.",
     tags: ["LLM", "Translation", "Fine-tuning", "Sanskrit", "Qwen-2.5-7B", "Model"],
     url: "https://huggingface.co/diabolic6045/Sanskrit-qwen-7B-Translate",
+  },
+  {
+    title: "Flux LoRAs",
+    description:
+      "Flux.dev model fine-tuned on different images creating various LoRAs that you can explore. Specialized LoRA adapters for different visual styles and concepts.",
+    tags: ["Generative AI", "Image Generation", "LoRA", "Flux", "Fine-tuning", "Model"],
+    url: "https://flux-loras.divaxshah.com",
   },
   {
     title: "Geolocation through Image Classification",
@@ -88,18 +103,40 @@ export const projects: Project[] = [
     url: "https://huggingface.co/diabolic6045/itineraries_Generator",
   },
   {
-    title: "Synthetic Data Generation",
+    title: "Lore Keeper",
     description:
-      "End-to-end synthetic structured data pipeline with Python + Gradio for cleaning, dedup, embeddings, and generation.",
-    tags: ["Generative AI", "Data Synthesis", "PyTorch", "Fine-tuning", "Llama-2", "Paper"],
-    url: "/documents/divax-recco.pdf",
+      "An infinite story generator tool with different genres and themes. Create endless narratives with customizable settings.",
+    tags: ["AI", "Story Generation", "NLP", "Creative AI", "Website"],
+    url: "https://lore-keeper.divaxshah.com",
   },
   {
-    title: "Something",
+    title: "World Sim",
     description:
-      "Investor news aggregator with AI summaries to track impactful updates on portfolios.",
-    tags: ["Flask", "Firebase", "Gemini AI", "App"],
-    url: "https://something-atep.onrender.com",
+      "A CLI-based game where users can simulate real worlds and play with them. Features different models to choose from for various simulation scenarios.",
+    tags: ["Game", "Simulation", "CLI", "AI", "Website"],
+    url: "https://world-sim.divaxshah.com",
+  },
+  {
+    title: "Todo",
+    description:
+      "A crazy 3D todo list keeper with immersive visual experience for managing your tasks.",
+    tags: ["3D", "Productivity", "WebGL", "Website"],
+    url: "https://todo.divaxshah.com",
+  },
+  {
+    title: "AURA Vibes - Random Quote Maker",
+    description:
+      "Generate your personal quotes with AI. Share a thought, choose your vibe, and watch AI craft a unique quote card just for you. Features manual input, Twitter analysis, multiple themes, moods, and card sizes.",
+    tags: ["AI", "Quote Generation", "Creative", "Website"],
+    url: "https://random-quote-maker.divaxshah.com",
+  },
+  {
+    title: "QuizWiz",
+    description:
+      "AI-powered platform for one-click custom chatbot creation with document ingestion (PDF/TXT), RAG via LlamaIndex, and deployment-ready workflows.",
+    tags: ["NLP", "Chatbot", "Flask", "Mistral-AI-API", "Gemini-API", "Website"],
+    url: "https://quizwiz.divaxshah.com",
+    deprecated: true,
   },
 ];
 
